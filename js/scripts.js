@@ -124,3 +124,17 @@ var periodicTable = {
   Tennessine: new Element(117, 'Ts', 294),
   Oganesson: new Element(118, 'Og', 294),
 }
+
+var toElementCase = function(string) {
+  var strippedString = string.toLowerCase().replace(/[^a-zA-Z]/g, '');;
+
+  return strippedString;
+}
+
+$(function() {
+  $('form').submit(function(event) {
+    var userInput = $('input#user-input').val();
+    console.log(toElementCase(userInput));
+    event.preventDefault();
+  });
+});
