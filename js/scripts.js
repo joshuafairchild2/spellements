@@ -1,8 +1,12 @@
+//------------------------------------------------------------------------------
+//----- Business Logic ---------------------------------------------------------
+//------------------------------------------------------------------------------
 function Element(number, symbol, weight) {
   this.number = number;
   this.symbol = symbol;
   this.weight = weight;
 }
+
 
 var periodicTable = {
   Hydrogen: new Element(1, 'H', 1.008),
@@ -125,16 +129,68 @@ var periodicTable = {
   Oganesson: new Element(118, 'Og', 294),
 }
 
-var toElementCase = function(string) {
-  var strippedString = string.toLowerCase().replace(/[^a-zA-Z]/g, '');;
 
-  return strippedString;
+var elementNames = Object.keys(periodicTable);
+
+
+var elementSymbols = function(obj) {
+  var symbols = [];
+  for (var key in obj) {
+    symbols.push(obj[key].symbol.toLowerCase())
+  }
+  return symbols;
 }
 
+
+var elementify = function(string) {
+  var symbolsArray = elementSymbols(periodicTable);
+  var strippedString = string.toLowerCase().replace(/[^a-zA-Z]/g, '');
+  var outputString = '';
+  var elementsArray = [];
+  var weightSum = 0;
+
+  for (var i = 0; i < strippedString.length; i) {
+    var len = outputString.length;
+
+    for (var j = 0; j < symbolsArray.length; j++) {
+      if (strippedString[i] == symbolsArray[j]) {
+        outputString += symbolsArray[j].toUpperCase();
+        elementsArray.push(elementNames[j]);
+        weightSum += periodicTable[elementNames[j]].weight;
+        i++;
+      }
+    }
+
+    for (var k = 0; k < symbolsArray.length; k++) {
+      if (strippedString.slice(i, (i + 2)) == symbolsArray[k]) {
+        outputString += (strippedString[i].toUpperCase() + strippedString[i + 1]);
+        weightSum += periodicTable[elementNames[k]].weight;
+        elementsArray.push(elementNames[k]);
+        i += 2;
+      }
+    }
+
+    if (outputString.length === len) {
+      outputString += strippedString[i];
+      i++;
+    }
+  }
+
+  var output = {
+    string: outputString,
+    elements: elementsArray,
+    weight: weightSum,
+  }
+  return output;
+}
+
+//------------------------------------------------------------------------------
+//----- Front End Logic --------------------------------------------------------
+//------------------------------------------------------------------------------
 $(function() {
   $('form').submit(function(event) {
     var userInput = $('input#user-input').val();
-    console.log(toElementCase(userInput));
+    console.log(elementify(userInput));
     event.preventDefault();
   });
 });
