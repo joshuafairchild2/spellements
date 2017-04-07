@@ -133,7 +133,7 @@ var periodicTable = {
 var elementNames = Object.keys(periodicTable);
 
 
-var elementSymbols = function(obj) {
+var getElementSymbols = function(obj) {
   var symbols = [];
   for (var key in obj) {
     symbols.push(obj[key].symbol.toLowerCase())
@@ -143,7 +143,7 @@ var elementSymbols = function(obj) {
 
 
 var elementify = function(string) {
-  var symbolsArray = elementSymbols(periodicTable);
+  var symbolsArray = getElementSymbols(periodicTable);
   var strippedString = string.toLowerCase().replace(/[^a-zA-Z]/g, '');
   var outputString = '';
   var elementsArray = [];
@@ -155,7 +155,7 @@ var elementify = function(string) {
     for (var j = 0; j < symbolsArray.length; j++) {
       if (strippedString[i] == symbolsArray[j]) {
         outputString += symbolsArray[j].toUpperCase();
-        elementsArray.push(elementNames[j]);
+        elementsArray.push(periodicTable[elementNames[j]]);
         weightSum += periodicTable[elementNames[j]].weight;
         i++;
       }
@@ -164,8 +164,8 @@ var elementify = function(string) {
     for (var k = 0; k < symbolsArray.length; k++) {
       if (strippedString.slice(i, (i + 2)) == symbolsArray[k]) {
         outputString += (strippedString[i].toUpperCase() + strippedString[i + 1]);
+        elementsArray.push(periodicTable[elementNames[k]]);
         weightSum += periodicTable[elementNames[k]].weight;
-        elementsArray.push(elementNames[k]);
         i += 2;
       }
     }
@@ -190,7 +190,21 @@ var elementify = function(string) {
 $(function() {
   $('form').submit(function(event) {
     var userInput = $('input#user-input').val();
-    console.log(elementify(userInput));
+    var outputData = elementify(userInput);
+
+    $('#table-area').empty();
+    $('#word-output').text(outputData.string);
+    $('#weight-output').text(outputData.weight);
+
+    outputData.elements.forEach(function(element) {
+      $('#table-area').append('<tr>' +
+                                '<td>' + elementNames[element.number - 1] + '</td>' +
+                                '<td>' + element.symbol + '</td>' +
+                                '<td>' + element.number +'</td>' +
+                                '<td>' + element.weight +'</td>' +
+                              '</tr>');
+    });
+
     event.preventDefault();
   });
 });
