@@ -152,21 +152,21 @@ var elementify = function(string) {
   for (var i = 0; i < strippedString.length; i) {
     var len = outputString.length;
 
-    for (var j = 0; j < symbolsArray.length; j++) {
-      if (strippedString[i] == symbolsArray[j]) {
-        outputString += symbolsArray[j].toUpperCase();
-        elementsArray.push(periodicTable[elementNames[j]]);
-        weightSum += periodicTable[elementNames[j]].weight;
-        i++;
-      }
-    }
-
     for (var k = 0; k < symbolsArray.length; k++) {
       if (strippedString.slice(i, (i + 2)) == symbolsArray[k]) {
         outputString += (strippedString[i].toUpperCase() + strippedString[i + 1]);
         elementsArray.push(periodicTable[elementNames[k]]);
         weightSum += periodicTable[elementNames[k]].weight;
         i += 2;
+      }
+    }
+
+    for (var j = 0; j < symbolsArray.length; j++) {
+      if (strippedString[i] == symbolsArray[j]) {
+        outputString += symbolsArray[j].toUpperCase();
+        elementsArray.push(periodicTable[elementNames[j]]);
+        weightSum += periodicTable[elementNames[j]].weight;
+        i++;
       }
     }
 
@@ -192,12 +192,13 @@ $(function() {
     var userInput = $('input#user-input').val();
     var outputData = elementify(userInput);
 
-    $('#table-area').empty();
+    $('tr.js-table').remove();
+    $('#weight-output, #word-output').empty();
     $('#word-output').text(outputData.string);
     $('#weight-output').text(outputData.weight);
 
     outputData.elements.forEach(function(element) {
-      $('#table-area').append('<tr>' +
+      $('#table-area').append('<tr class="js-table">' +
                                 '<td>' + elementNames[element.number - 1] + '</td>' +
                                 '<td>' + element.symbol + '</td>' +
                                 '<td>' + element.number +'</td>' +
