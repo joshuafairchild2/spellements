@@ -20,14 +20,15 @@ In addition to the newly transformed word, the user is also shown a bit more inf
 | ------   | ------------- |----------------|
 | Application will recognize any present elemental symbols and capitalize them accordingly | coffees | CoFFeEs |
 | Application will recognize as many elements as possible within words that aren't fully comprised of elemental symbols | spelling | **SP**el**LiN**g |
-| Application will not accept invalid entries | _user enters one of the following:_ <ul><li>"" or "  "</li><li>only punctuation</li><li>a number</li><li>A word containing no elemental symbols</li></ul>   | _modal window appears instructing the user what went wrong_ |  
+| Application will not accept invalid entries | _user enters one of the following:_ <ul><li>"" or "  "</li><li>only punctuation</li><li>a number</li><li>word containing no elemental symbols</li></ul>   | _modal window appears instructing the user what went wrong_ |  
 
 ----
 #### Setup/Installation
 * Clone this repository `git clone https://github.com/joshuafairchild1/spellements`
-* The webpage can also be viewed [here](https://joshuafairchild1.github.io/spellements/)
 
 * Navigate to "index.html" within the root directory and open it with any modern web browser
+
+* The webpage can also be viewed [here](https://joshuafairchild1.github.io/spellements/)
 
 #### Technologies Used
 * HTML
