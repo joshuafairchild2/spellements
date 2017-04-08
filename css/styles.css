@@ -32,6 +32,18 @@ body {
   margin-bottom: 50px;
 }
 
+#header-img {
+  display: block;
+  margin: auto;
+  padding: 5px;
+  height: 75px;
+  width: 75px;
+  border: solid 3px black;
+  border-radius: 50px;
+  background-color: #e5fcc2;
+  margin-top: 30px;
+}
+
 #submit-form {
   background-color: #e5fcc2;
 }
