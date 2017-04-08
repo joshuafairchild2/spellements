@@ -192,6 +192,8 @@ $(function() {
     var userInput = $('input#user-input').val();
     var outputData = elementify(userInput);
 
+    $(this).trigger('reset');
+    $('#output-container').show();
     $('tr.js-table').remove();
     $('#weight-output, #word-output').empty();
     $('#word-output').text(outputData.string);
