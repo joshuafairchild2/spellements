@@ -191,20 +191,30 @@ $(function() {
   $('#close-modal').click(function() {
     $("#invalid-form").modal('hide');
   });
+  
   $('form').submit(function(event) {
     var userInput = $('input#user-input').val();
     var outputData = elementify(userInput);
 
     if (!outputData.string) {
       $('#invalid-form').modal('show');
+      $('#modal-text').text('Please enter a word')
       $(this).trigger('reset');
-    } else {
+    }
+
+    else if (!outputData.elements.length) {
+      $('#invalid-form').modal('show');
+      $('#modal-text').text('Uh-oh, it appears that word doesn\'t contain any elemental symbols!')
+      $(this).trigger('reset')
+    }
+
+    else {
       $(this).trigger('reset');
       $('#output-container').show();
       $('tr.js-table').remove();
       $('#weight-output, #word-output').empty();
       $('#word-output').text(outputData.string);
-      $('#weight-output').text(outputData.weight);
+      $('#weight-output').text(outputData.weight.toFixed(4));
 
       outputData.elements.forEach(function(element) {
         $('#table-area').append('<tr class="js-table">' +
