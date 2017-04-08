@@ -6,40 +6,36 @@
     <script src='js/scripts.js'></script>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content='width=device-width, initial-scale=1'>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     <title>Spellements</title>
   </head>
   <body>
-    <h1 class="jumbotron text-center">Spelling With Elements</h1>
+    <h1 class="jumbotron" id='page-header'>Spelling With Elements</h1>
     <div class="container">
       <form>
         <div class="form-group">
-          <label for="user-input">Enter a word</label>
+          <label for="user-input">Enter a word:</label>
           <input class="form-control" type="text" id='user-input'>
         </div>
-        <button class="btn btn-block" type="submit">Elementify</button>
+        <button class="btn btn-block btn-lg" type="submit" id='submit-form'><strong>Elementify!</strong></button>
       </form>
       <div id="output-container" class="well">
-        <div class="row">
-          <div class="col-sm-9">
-            <div id="word">
-              <span id='word-output'></span>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <p>The atomic weight of the elements making up your word is: <span id="weight-output"></span></p>
-          </div>
-        </div>  
-        <div class="row">
-          <div class="col-sm-12">
-            <table style="width:100%" id='table-area'>
-              <tr>
-                <th>Element Name</th>
-                <th>Element Symbol</th>
-                <th>Atomic Number</th>
-                <th>Atomic Weight</th>
-              </tr>
-            </table>
-          </div>
+        <div id='word'>
+          <span id='word-output'></span>
+        </div>
+        <p id='elements-list-header'>Your word is composed of the following elements:</p>
+        <table style="width:100%" id='table-area'>
+          <tr>
+            <th>Element Name</th>
+            <th>Element Symbol</th>
+            <th>Atomic Number</th>
+            <th>Atomic Mass</th>
+          </tr>
+        </table>
+        <div id='weight'>
+          <p>The atomic mass of the elements making up your word is <span id="weight-output"></span> amu!</p>
         </div>
       </div>
     </div>
