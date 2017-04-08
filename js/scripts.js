@@ -153,7 +153,7 @@ var elementify = function(string) {
     var len = outputString.length;
 
     for (var k = 0; k < symbolsArray.length; k++) {
-      if (strippedString.slice(i, (i + 2)) == symbolsArray[k]) {
+      if (strippedString.slice(i, (i + 2)) === symbolsArray[k] && strippedString.slice(i, (i + 2)).length === 2) {
         outputString += (strippedString[i].toUpperCase() + strippedString[i + 1]);
         elementsArray.push(periodicTable[elementNames[k]]);
         weightSum += periodicTable[elementNames[k]].weight;
@@ -162,7 +162,7 @@ var elementify = function(string) {
     }
 
     for (var j = 0; j < symbolsArray.length; j++) {
-      if (strippedString[i] == symbolsArray[j]) {
+      if (strippedString[i] === symbolsArray[j]) {
         outputString += symbolsArray[j].toUpperCase();
         elementsArray.push(periodicTable[elementNames[j]]);
         weightSum += periodicTable[elementNames[j]].weight;
