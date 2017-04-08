@@ -29,6 +29,7 @@ body {
   text-align: center;
   font-family: lobster;
   font-size: 46pt;
+  margin-bottom: 50px;
 }
 
 #submit-form {
@@ -71,4 +72,37 @@ body {
 #elements-list-header {
   font-size: 14pt;
   font-weight: bold;
+}
+
+#close-modal {
+  background-color: #e5fcc2;
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  max-width: 350px;
+}
+
+.modal-content {
+  background-color: #45ada8;
+}
+
+.modal h4 {
+  margin-bottom: 20px;
+  text-align: center;
 }

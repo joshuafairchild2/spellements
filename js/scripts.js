@@ -188,25 +188,33 @@ var elementify = function(string) {
 //----- Front End Logic --------------------------------------------------------
 //------------------------------------------------------------------------------
 $(function() {
+  $('#close-modal').click(function() {
+    $("#invalid-form").modal('hide');
+  });
   $('form').submit(function(event) {
     var userInput = $('input#user-input').val();
     var outputData = elementify(userInput);
 
-    $(this).trigger('reset');
-    $('#output-container').show();
-    $('tr.js-table').remove();
-    $('#weight-output, #word-output').empty();
-    $('#word-output').text(outputData.string);
-    $('#weight-output').text(outputData.weight);
+    if (!outputData.string) {
+      $('#invalid-form').modal('show');
+      $(this).trigger('reset');
+    } else {
+      $(this).trigger('reset');
+      $('#output-container').show();
+      $('tr.js-table').remove();
+      $('#weight-output, #word-output').empty();
+      $('#word-output').text(outputData.string);
+      $('#weight-output').text(outputData.weight);
 
-    outputData.elements.forEach(function(element) {
-      $('#table-area').append('<tr class="js-table">' +
-                                '<td>' + elementNames[element.number - 1] + '</td>' +
-                                '<td>' + element.symbol + '</td>' +
-                                '<td>' + element.number +'</td>' +
-                                '<td>' + element.weight +'</td>' +
-                              '</tr>');
-    });
+      outputData.elements.forEach(function(element) {
+        $('#table-area').append('<tr class="js-table">' +
+        '<td>' + elementNames[element.number - 1] + '</td>' +
+        '<td>' + element.symbol + '</td>' +
+        '<td>' + element.number +'</td>' +
+        '<td>' + element.weight +'</td>' +
+        '</tr>');
+      });
+    }
 
     event.preventDefault();
   });
